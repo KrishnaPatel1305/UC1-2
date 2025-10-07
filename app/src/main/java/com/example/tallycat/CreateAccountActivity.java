@@ -1,39 +1,73 @@
 package com.example.tallycat;
 
-import android.content.Intent; // Make sure this is imported
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView; // Make sure this is imported
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 public class CreateAccountActivity extends AppCompatActivity {
+
+    private Button btnUserAccount;
+    private Button btnAdminAccount;
+    private EditText adminCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        // --- Start of New Code to Add ---
-
-        // 1. Find the TextView by its ID from the layout
+        // Initialize Views
+        btnUserAccount = findViewById(R.id.btnUserAccount);
+        btnAdminAccount = findViewById(R.id.btnAdminAccount);
+        adminCode = findViewById(R.id.adminCode);
         TextView loginLink = findViewById(R.id.loginLink);
 
-        // 2. Set an OnClickListener to handle clicks
-        loginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 3. Create an Intent to open MainActivity
-                Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+        // --- Logic for Account Type Selection ---
 
-                // Optional: Clear the activity stack
-                // This makes it so the user can't press the "back" button to return to the create account page.
-                // It's good practice for login/logout flows.
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        // Set the initial state: User Account is selected by default
+        selectUserAccount();
 
-                startActivity(intent);
-            }
+        btnUserAccount.setOnClickListener(v -> selectUserAccount());
+        btnAdminAccount.setOnClickListener(v -> selectAdminAccount());
+
+
+        // --- Logic to go back to Login Screen ---
+
+        loginLink.setOnClickListener(v -> {
+            // Create an Intent to open MainActivity
+            Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+            // Clear the activity stack for a cleaner navigation flow
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         });
+    }
 
-        // --- End of New Code to Add ---
+    private void selectUserAccount() {
+        btnUserAccount.setSelected(true);
+        btnAdminAccount.setSelected(false);
+
+        // Update text colors
+        btnUserAccount.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        btnAdminAccount.setTextColor(ContextCompat.getColor(this, R.color.text_light));
+
+        // Hide admin code field
+        adminCode.setVisibility(View.GONE);
+    }
+
+    private void selectAdminAccount() {
+        btnUserAccount.setSelected(false);
+        btnAdminAccount.setSelected(true);
+
+        // Update text colors
+        btnAdminAccount.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        btnUserAccount.setTextColor(ContextCompat.getColor(this, R.color.text_light));
+
+        // Show admin code field
+        adminCode.setVisibility(View.VISIBLE);
     }
 }
