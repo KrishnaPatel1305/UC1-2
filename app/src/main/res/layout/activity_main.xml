@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:id="@+id/main"
     android:layout_height="match_parent"
-    android:background="@drawable/catbg"
+    android:background="@color/background_light"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="24dp">
@@ -15,8 +15,8 @@
     <!-- App Title -->
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="149dp"
-        android:layout_height="118dp"
+        android:layout_width="113dp"
+        android:layout_height="96dp"
         app:srcCompat="@drawable/catlogo" />
 
     <TextView
@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:fontFamily="@font/abril_fatface"
         android:text="Tally Cat"
         android:textColor="@color/text_light"
         android:textSize="28sp"
@@ -34,10 +35,11 @@
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="sans-serif-black"
         android:text="Welcome back! Please sign in to continue."
         android:textColor="@color/muted_light"
-        android:textSize="14sp"
-        android:layout_marginBottom="24dp"/>
+        android:textSize="14sp" />
 
     <!-- Username -->
     <TextView
@@ -76,11 +78,12 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/primary"
-        android:layout_marginBottom="16dp"/>
+        android:fontFamily="@font/alice"
+        android:text="Sign In"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <!-- Forgot Password -->
     <TextView
